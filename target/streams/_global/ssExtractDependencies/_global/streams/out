@@ -1,0 +1,50 @@
+[error] lmcoursier.internal.shaded.coursier.error.FetchError$DownloadingArtifacts: Error fetching artifacts:
+[error] https://repo1.maven.org/maven2/org/openjfx/javafx-media/18.0.1/javafx-media-18.0.1-${javafx.platform}.jar: not found: https://repo1.maven.org/maven2/org/openjfx/javafx-media/18.0.1/javafx-media-18.0.1-${javafx.platform}.jar
+[error] https://repo1.maven.org/maven2/org/openjfx/javafx-fxml/18.0.1/javafx-fxml-18.0.1-${javafx.platform}.jar: not found: https://repo1.maven.org/maven2/org/openjfx/javafx-fxml/18.0.1/javafx-fxml-18.0.1-${javafx.platform}.jar
+[error] https://repo1.maven.org/maven2/org/openjfx/javafx-swing/18.0.1/javafx-swing-18.0.1-${javafx.platform}.jar: not found: https://repo1.maven.org/maven2/org/openjfx/javafx-swing/18.0.1/javafx-swing-18.0.1-${javafx.platform}.jar
+[error] https://repo1.maven.org/maven2/org/openjfx/javafx-base/18.0.1/javafx-base-18.0.1-${javafx.platform}.jar: not found: https://repo1.maven.org/maven2/org/openjfx/javafx-base/18.0.1/javafx-base-18.0.1-${javafx.platform}.jar
+[error] https://repo1.maven.org/maven2/org/openjfx/javafx-graphics/18.0.1/javafx-graphics-18.0.1-${javafx.platform}.jar: not found: https://repo1.maven.org/maven2/org/openjfx/javafx-graphics/18.0.1/javafx-graphics-18.0.1-${javafx.platform}.jar
+[error] https://repo1.maven.org/maven2/org/openjfx/javafx-controls/18.0.1/javafx-controls-18.0.1-${javafx.platform}.jar: not found: https://repo1.maven.org/maven2/org/openjfx/javafx-controls/18.0.1/javafx-controls-18.0.1-${javafx.platform}.jar
+[error] https://repo1.maven.org/maven2/org/openjfx/javafx-web/18.0.1/javafx-web-18.0.1-${javafx.platform}.jar: not found: https://repo1.maven.org/maven2/org/openjfx/javafx-web/18.0.1/javafx-web-18.0.1-${javafx.platform}.jar
+[error] 
+[error] 	at lmcoursier.internal.shaded.coursier.Artifacts$.$anonfun$fetchArtifacts$9(Artifacts.scala:346)
+[error] 	at lmcoursier.internal.shaded.coursier.util.Task$.$anonfun$flatMap$extension$1(Task.scala:14)
+[error] 	at lmcoursier.internal.shaded.coursier.util.Task$.$anonfun$flatMap$extension$1$adapted(Task.scala:14)
+[error] 	at lmcoursier.internal.shaded.coursier.util.Task$.wrap(Task.scala:84)
+[error] 	at lmcoursier.internal.shaded.coursier.util.Task$.$anonfun$flatMap$2(Task.scala:14)
+[error] 	at scala.concurrent.Future.$anonfun$flatMap$1(Future.scala:307)
+[error] 	at scala.concurrent.impl.Promise.$anonfun$transformWith$1(Promise.scala:41)
+[error] 	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)
+[error] 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+[error] 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+[error] 	at java.base/java.lang.Thread.run(Thread.java:833)
+[error] Caused by: lmcoursier.internal.shaded.coursier.cache.ArtifactError$NotFound: not found: https://repo1.maven.org/maven2/org/openjfx/javafx-media/18.0.1/javafx-media-18.0.1-${javafx.platform}.jar
+[error] 	at lmcoursier.internal.shaded.coursier.cache.internal.Downloader$Blocking$.doDownload(Downloader.scala:217)
+[error] 	at lmcoursier.internal.shaded.coursier.cache.internal.Downloader$Blocking$.$anonfun$remote$2(Downloader.scala:380)
+[error] 	at lmcoursier.internal.shaded.coursier.cache.internal.Downloader$.$anonfun$downloading$1(Downloader.scala:678)
+[error] 	at lmcoursier.internal.shaded.coursier.cache.CacheLocks$.withUrlLock(CacheLocks.scala:116)
+[error] 	at lmcoursier.internal.shaded.coursier.cache.internal.Downloader$.helper$2(Downloader.scala:678)
+[error] 	at lmcoursier.internal.shaded.coursier.cache.internal.Downloader$.coursier$cache$internal$Downloader$$downloading(Downloader.scala:711)
+[error] 	at lmcoursier.internal.shaded.coursier.cache.internal.Downloader$Blocking$.$anonfun$remote$1(Downloader.scala:380)
+[error] 	at lmcoursier.internal.shaded.coursier.cache.CacheLocks$.loop$1(CacheLocks.scala:72)
+[error] 	at lmcoursier.internal.shaded.coursier.cache.CacheLocks$.withLockOr(CacheLocks.scala:98)
+[error] 	at lmcoursier.internal.shaded.coursier.cache.internal.Downloader$Blocking$.remote(Downloader.scala:382)
+[error] 	at lmcoursier.internal.shaded.coursier.cache.internal.Downloader.$anonfun$remote$5(Downloader.scala:480)
+[error] 	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:659)
+[error] 	at scala.util.Success.$anonfun$map$1(Try.scala:255)
+[error] 	at scala.util.Success.map(Try.scala:213)
+[error] 	at scala.concurrent.Future.$anonfun$map$1(Future.scala:292)
+[error] 	at scala.concurrent.impl.Promise.liftedTree1$1(Promise.scala:33)
+[error] 	at scala.concurrent.impl.Promise.$anonfun$transform$1(Promise.scala:33)
+[error] 	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)
+[error] 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+[error] 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+[error] 	at java.base/java.lang.Thread.run(Thread.java:833)
+[error] (ssExtractDependencies) lmcoursier.internal.shaded.coursier.error.FetchError$DownloadingArtifacts: Error fetching artifacts:
+[error] https://repo1.maven.org/maven2/org/openjfx/javafx-media/18.0.1/javafx-media-18.0.1-${javafx.platform}.jar: not found: https://repo1.maven.org/maven2/org/openjfx/javafx-media/18.0.1/javafx-media-18.0.1-${javafx.platform}.jar
+[error] https://repo1.maven.org/maven2/org/openjfx/javafx-fxml/18.0.1/javafx-fxml-18.0.1-${javafx.platform}.jar: not found: https://repo1.maven.org/maven2/org/openjfx/javafx-fxml/18.0.1/javafx-fxml-18.0.1-${javafx.platform}.jar
+[error] https://repo1.maven.org/maven2/org/openjfx/javafx-swing/18.0.1/javafx-swing-18.0.1-${javafx.platform}.jar: not found: https://repo1.maven.org/maven2/org/openjfx/javafx-swing/18.0.1/javafx-swing-18.0.1-${javafx.platform}.jar
+[error] https://repo1.maven.org/maven2/org/openjfx/javafx-base/18.0.1/javafx-base-18.0.1-${javafx.platform}.jar: not found: https://repo1.maven.org/maven2/org/openjfx/javafx-base/18.0.1/javafx-base-18.0.1-${javafx.platform}.jar
+[error] https://repo1.maven.org/maven2/org/openjfx/javafx-graphics/18.0.1/javafx-graphics-18.0.1-${javafx.platform}.jar: not found: https://repo1.maven.org/maven2/org/openjfx/javafx-graphics/18.0.1/javafx-graphics-18.0.1-${javafx.platform}.jar
+[error] https://repo1.maven.org/maven2/org/openjfx/javafx-controls/18.0.1/javafx-controls-18.0.1-${javafx.platform}.jar: not found: https://repo1.maven.org/maven2/org/openjfx/javafx-controls/18.0.1/javafx-controls-18.0.1-${javafx.platform}.jar
+[error] https://repo1.maven.org/maven2/org/openjfx/javafx-web/18.0.1/javafx-web-18.0.1-${javafx.platform}.jar: not found: https://repo1.maven.org/maven2/org/openjfx/javafx-web/18.0.1/javafx-web-18.0.1-${javafx.platform}.jar
