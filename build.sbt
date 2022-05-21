@@ -1,8 +1,10 @@
-name := "untitled2"
+name := "testScala2"
 
 version := "0.1"
 
+// Version of Scala used by the project
 scalaVersion := "2.13.8"
+
 // Add dependency on ScalaFX library
 libraryDependencies += "org.scalafx" %% "scalafx" % "18.0.1-R27"
 

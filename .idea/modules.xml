@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/game-engine_6525.iml" filepath="$PROJECT_DIR$/.idea/modules/game-engine_6525.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/game-engine_6525-build.iml" filepath="$PROJECT_DIR$/.idea/modules/game-engine_6525-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/project.testScala2-build.iml" filepath="$PROJECT_DIR$/.idea/modules/project.testScala2-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/testScala2.iml" filepath="$PROJECT_DIR$/.idea/modules/testScala2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/testScala2-build.iml" filepath="$PROJECT_DIR$/.idea/modules/testScala2-build.iml" />
     </modules>
   </component>
 </project>
