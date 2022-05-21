@@ -8,7 +8,8 @@ import scalafx.scene.shape.Rectangle
 class SetImages {
   def set(raw: Int, col: Int, rectangle: Rectangle, color: Boolean): Rectangle =
   {
-    var path: String = "C:\\Users\\louai\\Desktop\\Game-Engine\\imgs"
+    var curDir :String =System.getProperty("user.dir")
+    var path: String = curDir.concat("\\imgs");
     if (raw == 0)
       {
         path = path + "\\black\\"+col+".png"
