@@ -134,13 +134,15 @@ object Root {
   def start () {
     val starter = new StartScreen
     var board: Any = null
-
     var choice = starter.get_choice() match {
-      case "xo" => {
+      case "XO" => {
         board = new XO; Game_Engine(xo_drawer, xo_controller, board);
       }
       case "connect4" => {
         board = new Connect4; Game_Engine(connect4_drawer, connect4_controller, board);
+      }
+      case "chess" => {
+        println("asda")
       }
       //case _ => board = new XO
       //todo list the other cases

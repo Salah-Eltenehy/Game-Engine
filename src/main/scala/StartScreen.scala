@@ -64,6 +64,7 @@ class StartScreen {
         }
       }
     }
+    println(choice)
     app.main(Array(""))
     choice
   }
