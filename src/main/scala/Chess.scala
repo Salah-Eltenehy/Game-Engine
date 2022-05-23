@@ -18,7 +18,7 @@ class Chess {
   def nextTurn(turn: Char): Char = if (turn == 'W') 'B'
   else 'W'
   //get square color from its index in the array
-  def isEmpty(row:Int,col:Int) : Boolean = (this.chess_board(row)(col) == '.' || this.chess_board(row)(col) == '-')
+  def isEmpty(row:Int,col:Int) : Boolean = this.chess_board(row)(col) == '.' || this.chess_board(row)(col) == '-'
 
   //if the letter is lowercase we know its white other wise its black//if the letter is lowercase we know its white other wise its black
   def getSide(piece: Char): Char = {
@@ -26,15 +26,16 @@ class Chess {
     'B'
   }
   //we check if the input of the promotion is right so we can call our doPromotion function
-  def isValidPromotionInput(row : Int , col : Int ,toRow :Int, toCol :Int): Unit =
+  def isValidPromotionInput(row : Int , col : Int ,toRow :Int, toCol :Int):Unit =
   {
-    var piece:Char =this.chess_board(row)(col)
+    val piece:Char =this.chess_board(row)(col)
     if(getLower(piece) == 'p' &&( (getSide(piece)=='W' && toRow==0)||getSide(piece)=='B' && toRow==7))
       {
         //ask engine which peice to promote
-        var promote : Char = 'Q' //TODO: engine function
+        val promote : Char = 'Q' //TODO: engine function
         doPromotion(row,col,toRow,toCol,promote)
       }
+
   }
   //match case for promotion peices
   def promotionPiece(promotion : Char) :Char =promotion match {
@@ -46,10 +47,10 @@ class Chess {
   //we check if the isValidPromotionInput true then we can safely do our promotion
   def doPromotion( row:Int, col:Int,toRow:Int, toCol:Int, promote:Char) :Unit =
   {
-    var piece : Char =this.chess_board(row)(col)
+    val piece : Char =this.chess_board(row)(col)
     var promotion:Char ='\0'
 
-    promotion=promotionPiece(promotion)
+    promotion=promotionPiece(promote)
 
     if(getSide(piece)=='W')
       promotion=getLower(promotion)
@@ -74,21 +75,21 @@ class Chess {
                                   else  (c - 'A' + 'a').toChar
 
   def checkPawnMove(row:Int,col:Int,toRow:Int, toCol:Int,turn:Char):Boolean={
-    var sign= turn match {
+    val sign= turn match {
       case 'W' => -1
       case 'B' => 1
     }
     // one forward move
-    ( ((toRow==row+1*sign)&&(toCol==col&& isEmpty(toRow,toCol)) ||  //or going to kill an enemy
+     ((toRow==row+1*sign)&&(toCol==col&& isEmpty(toRow,toCol)) ||  //or going to kill an enemy
       (Math.abs(toCol-col)==1 && !isEmpty(toRow,toCol) &&getSide(this.chess_board(toRow)(toCol)) != getSide(this.chess_board(row)(col)))) || //or two moves first move
-      (toRow==row+2*sign && toCol==col&&notMovedPawn(row,col,turn) && isEmpty(toRow,toCol) && isEmpty(toRow-sign,toCol)) )
+      (toRow==row+2*sign && toCol==col&&notMovedPawn(row,col,turn) && isEmpty(toRow,toCol) && isEmpty(toRow-sign,toCol))
   }
   //we check if it move on same colomn or same row
   def checkRookMove(row:Int,col:Int,toRow:Int, toCol:Int):Boolean= {
     if(toRow!=row&&toCol!=col)
-      return false;
-    var dx : Array[Int]= Array(1,-1,0,0)
-    var dy : Array[Int]= Array(0,0,1,-1)
+      return false
+    val dx : Array[Int]= Array(1,-1,0,0)
+    val dy : Array[Int]= Array(0,0,1,-1)
     var j :Int=0
     var i :Int=1
     while (j<4){
@@ -109,10 +110,10 @@ class Chess {
   //we check if it move on different row and different col with same difference between each other
   def checkBishopMove(row:Int,col:Int,toRow:Int, toCol:Int):Boolean= {
     if(toRow!=row&&toCol!=col)
-      return false;
+      return false
 
-    var dx : Array[Int]= Array(1,1,-1,-1)
-    var dy : Array[Int]= Array(1,-1,1,-1)
+    val dx : Array[Int]= Array(1,1,-1,-1)
+    val dy : Array[Int]= Array(1,-1,1,-1)
     var j :Int=0
     var i :Int=1
     while (j<4){
@@ -147,19 +148,19 @@ class Chess {
   //apply check validation on each piece accordingly
   def checkValidPiece(piece : Char ,row :Int,col:Int,toRow:Int,toCol:Int,turn:Char) :Boolean =piece match {
     case 'p' =>
-      return checkPawnMove( row, col, toRow, toCol, turn)
+      checkPawnMove( row, col, toRow, toCol, turn)
     case 'k' =>
-      return checkKingMove( row, col, toRow, toCol)
+      checkKingMove( row, col, toRow, toCol)
     case 'n' =>
-      return checkKnightMove( row, col, toRow, toCol)
+      checkKnightMove( row, col, toRow, toCol)
     case 'b' =>
-      return checkBishopMove( row, col, toRow, toCol)
+      checkBishopMove( row, col, toRow, toCol)
     case 'r' =>
-      return checkRookMove( row, col, toRow, toCol)
+      checkRookMove( row, col, toRow, toCol)
     case 'q' =>
-      return checkQueenMove( row, col, toRow, toCol)
+      checkQueenMove( row, col, toRow, toCol)
     case _ =>
-      return false
+      false
   }
   //we check if the move is valid (legal)
   //if we are catching empty index then it'snot valid
@@ -170,8 +171,8 @@ class Chess {
 
     if (isEmpty(row, col)) return false
 
-    var piece:Char=this.chess_board(row)(col)
-    var toCell:Char=this.chess_board(toRow)(toCol)
+    val piece:Char=this.chess_board(row)(col)
+    val toCell:Char=this.chess_board(toRow)(toCol)
 
     if ((getSide(piece) != turn) || (!isEmpty( toRow, toCol) && (getSide(toCell) == turn))) return false
 
@@ -184,7 +185,7 @@ class Chess {
           case 'B' =>  this.chess_board(row)(col) = '.'
         }
         this.chess_board(toRow)(toCol) =piece
-        var flag :Boolean= isCheck(turn)
+        val flag :Boolean= isCheck(turn)
         this.chess_board(toRow)(toCol)=toCell
         this.chess_board(row)(col)=piece
         if(flag)
@@ -244,7 +245,7 @@ class Chess {
       while (j<8){
         while (k<8){
           while (l<8){
-            var currentF=isValid(i,j,k,l,turn,1)
+            val currentF=isValid(i,j,k,l,turn,1)
 //            if(currentF)
 //                printf("%d %d %d %d\n", i,j,k,l)
             flag= flag & !currentF
