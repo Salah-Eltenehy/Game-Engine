@@ -86,6 +86,18 @@ object Root {
     return true
   }
 
+
+  def checkersController(player_turn:Int, input : String, boardn : Any): Boolean = {
+    val board = boardn.asInstanceOf[checkers]
+
+    val moveDetails:((Int, Int), (Int, Int))  = if(board.validateInput(input)) board.translateInput(input)
+    else return false
+
+    val move: Unit = if(board.validateMove(moveDetails._1,moveDetails._2, player_turn))
+                        board.movePiece(moveDetails._1,moveDetails._2, player_turn )
+
+    return true
+  }
   //var x = readLine()
   //var getter = new Input
 
