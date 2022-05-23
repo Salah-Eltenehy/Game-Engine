@@ -31,13 +31,13 @@ class Chess {
     val piece:Char =this.chess_board(row)(col)
     if(getLower(piece) == 'p' &&( (getSide(piece)=='W' && toRow==0)||getSide(piece)=='B' && toRow==7))
       {
-        //ask engine which peice to promote
+        //ask engine which piece to promote
         val promote : Char = 'Q' //TODO: engine function
         doPromotion(row,col,toRow,toCol,promote)
       }
 
   }
-  //match case for promotion peices
+  //match case for promotion pieces
   def promotionPiece(promotion : Char) :Char =promotion match {
     case 'r' => 'R'
     case 'n' => 'N'
@@ -84,7 +84,7 @@ class Chess {
       (Math.abs(toCol-col)==1 && !isEmpty(toRow,toCol) &&getSide(this.chess_board(toRow)(toCol)) != getSide(this.chess_board(row)(col)))) || //or two moves first move
       (toRow==row+2*sign && toCol==col&&notMovedPawn(row,col,turn) && isEmpty(toRow,toCol) && isEmpty(toRow-sign,toCol))
   }
-  //we check if it move on same colomn or same row
+  //we check if it move on same column or same row
   def checkRookMove(row:Int,col:Int,toRow:Int, toCol:Int):Boolean= {
     if(toRow!=row&&toCol!=col)
       return false
@@ -163,9 +163,9 @@ class Chess {
       false
   }
   //we check if the move is valid (legal)
-  //if we are catching empty index then it'snot valid
+  //if we are catching empty index then it is not valid
   //then we check the possible move for this piece using check functions
-  //in case of ischeck we put mainturn=0 as we dont want to do the stuff in this condition in that case
+  //in case of ischeck we put mainturn=0 as we don't want to do the stuff in this condition in that case
   //when the user input mainturn =2 and from program will be 1 or 0
   def isValid(row :Int , col :Int ,toRow :Int,toCol :Int,turn:Char,mainTurn:Int) : Boolean ={
 
@@ -220,7 +220,7 @@ class Chess {
     var rowX:Int =0
     var colX:Int =0
     var flag :Boolean=false
-    //check all possible move from any peice to the king
+    //check all possible move from any piece to the king
     while (colX <= 7){
       while (rowX <= 7){
         flag=flag | isValid (rowX,colX,rowK,colK,nextTurn(turn), 0)
