@@ -1,4 +1,3 @@
-import ChessGUI.Board
 import javafx.scene.paint.ImagePattern
 import scalafx.application.JFXApp
 import scalafx.scene._

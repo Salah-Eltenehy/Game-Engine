@@ -1,10 +1,12 @@
-package ChessGUI
-
+import ChessGUI.SetImages
+import javafx.scene.paint.ImagePattern
+import scalafx.scene.image.Image
 import scalafx.scene.layout.GridPane
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Rectangle
 
 class Board {
+  var board = new Chess
   var number_of_clickes: Int = 0
   var first_click: String = ""
   var second_click: String = ""
@@ -24,7 +26,19 @@ class Board {
                     rec2.fill = Color.Wheat
                   else
                     rec2.fill = Color.Lavender
-                  rec = setImages.set(j, i, rec, white)
+                  var curDir :String =System.getProperty("user.dir")
+                  if (j == 0 || j == 1 || j == 6 || j == 7)
+                    {
+                      var img = new Image(curDir+"\\imgs\\chess\\"+board.chess_board(j)(i)+".png")
+                      rec.setFill(new ImagePattern((img)))
+                    }
+                    else if (board.chess_board(j)(i).equals("-")) {
+                    rec.setFill(Color.Lavender)
+                  }
+                  else if(board.chess_board(j)(i).equals(".")) {
+                    rec.setFill(Color.Wheat)
+                  }
+           //       rec = setImages.set(j, i, rec, white)
                   white = !white
   //                test(rec)
                   gridPane.setOnMouseClicked((e) => {
