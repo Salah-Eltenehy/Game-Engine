@@ -1,6 +1,6 @@
 import java.util.NoSuchElementException
 
-class checkers {
+class Checker_Controller {
     //shape of the game board
     var checkersBoard : Array[Array[String]] = Array(Array("_","_","_", "_", "_", "_" ,"_", "_"),
                                                      Array("_","_","_", "_", "_", "_" ,"_", "_"),
@@ -42,14 +42,12 @@ class checkers {
                                       new block("w", 7, 6)
   )
 
-  //set the pieces on the board
-  def setBoard(): Unit = {
+
     //set all white pieces on board
     whitePieces.foreach(piece => checkersBoard(piece.position._1)(piece.position._2) = piece.color)
 
     //set all black pieces on board
     blackPieces.foreach(piece => checkersBoard(piece.position._1)(piece.position._2) = piece.color)
-  }
 
   //check if the input is valid
   def validateInput(input: String): Boolean= {
