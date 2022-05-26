@@ -8,7 +8,7 @@ object Root {
 
 
   def xo_controller(player_turn:Int, input : String, boardn : Any) : String = {
-    val board = boardn.asInstanceOf[XO]
+    val board = boardn.asInstanceOf[XO_Controller]
 
     /*
     val i = input.substring(1,2).toInt - 1
@@ -122,22 +122,21 @@ object Root {
   xo_controller(1, getter.get_input(x))
   x = readLine()
   xo_controller(2, getter.get_input(x))*/
+  private var player = 1
+  def Game_Engine (drawer : (String) => String , controller : (Int, String, Any) => String, board : Any) : String = {
 
-  def Game_Engine (drawer : (String) => String , controller : (Int, String, Any) => String, board : Any) : Unit = {
-    var player = 1
-
-    val getter = new Input
-    var x = drawer("");
-    while (true) {
+      val getter = new Input
+      var x = drawer("");
       val valid = controller(player, getter.get_input(x), board)
-      if (valid.equals("")) {
-        x = drawer(valid)
-      }else {
         x = drawer(valid);
-        if (player == 1) player = 2
-        else player = 1
-      }
+    if(!valid.equals("")) {
+      if (player == 1) player = 2
+      else player = 1
     }
+
+    valid
+  }
+
 
 /*
     def game_logic (input_from_drawer : String): String = {
@@ -173,7 +172,7 @@ object Root {
      }
       if (x == "end") runing = false
     }*/
-  }
+
   def xo_drawer(state:String) : String = {
     val input = readLine()
     input
@@ -190,7 +189,7 @@ object Root {
     var choice = starter.get_choice() match {
       case "XO" => {
         var obj = new TestGame
-        board = new XO; Game_Engine(obj.xo_drawer, xo_controller, board);
+        board = new XO_Controller; Game_Engine(obj.xo_drawer, xo_controller, board);
       }
       case "connect4" => {
         board = new Connect4; Game_Engine(connect4_drawer, connect4_controller, board);

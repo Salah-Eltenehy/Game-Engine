@@ -48,9 +48,7 @@ class Chess {
   def doPromotion( row:Int, col:Int,toRow:Int, toCol:Int, promote:Char) :Unit =
   {
     val piece : Char =this.chess_board(row)(col)
-    var promotion:Char ='\0'
-
-    promotion=promotionPiece(promote)
+    var promotion:Char =promotionPiece(promote)
 
     if(getSide(piece)=='W')
       promotion=getLower(promotion)
