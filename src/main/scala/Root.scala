@@ -1,12 +1,16 @@
+import ChessGUI.TestGame
+
 import scala.io.StdIn.readLine
 
 object Root {
   println("hello in root")
   //var board : Any
 
-  def xo_controller(player_turn:Int, input : String, boardn : Any) : Boolean = {
+
+  def xo_controller(player_turn:Int, input : String, boardn : Any) : String = {
     val board = boardn.asInstanceOf[XO]
 
+    /*
     val i = input.substring(1,2).toInt - 1
     var j : Int = 0
     var char = input.substring(0,1) match {
@@ -14,13 +18,16 @@ object Root {
       case "b" => j=1
       case "c" => j=2
       case _ => j= -1
-    }
+    }*/
+
+    val i = input.substring(0,1).toInt
+    val j = input.substring(2,3).toInt
 
     println("i is " + i + " j is " + j)
     //println("board(i)(j) is "+ board.xo_board(i)(j))
 
-    if (j == -1 || i <0 || i>2 || input.length > 2) {println("in valid") ;return false;}
-    if (board.xo_board(i)(j) != "_"){println("in valid") ;return false;}
+    if (j <0 || j>2 || i <0 || i>2 || input.length > 3) {println("in valid") ;return "";}
+    if (board.xo_board(i)(j) != "_"){println("in valid") ;return "";}
     board.make_play(i,j,player_turn)
     var c = 0;
     var h=0;
@@ -35,10 +42,11 @@ object Root {
         println()
       }
     }
-    return true
+    if (player_turn == 1)  "X";
+    else  "O";
   }
 
-  def connect4_controller(player_turn:Int, input : String, boardn : Any) : Boolean = {
+  def connect4_controller(player_turn:Int, input : String, boardn : Any) : String = {
     val board = boardn.asInstanceOf[Connect4]
 
     var col : Int = 0
@@ -56,7 +64,7 @@ object Root {
     println("col is " + col)
     //println("board(i)(j) is "+ board.xo_board(i)(j))
 
-    if (col == -1 || input.length > 1) {println("invalid") ;return false;}
+    if (col == -1 || input.length > 1) {println("invalid") ;return "";}
     var no_place = true
     var row_no = 0
     while (no_place && row_no < 6) {
@@ -67,7 +75,7 @@ object Root {
       }
     }
 
-    if (no_place) {println("invalid"); return false;}
+    if (no_place) {println("invalid"); return "";}
     board.make_play(col,player_turn)
     var c = 0;
     var h=0;
@@ -83,7 +91,8 @@ object Root {
       }
     }
     //println(board.xo_board)
-    return true
+    //todo reuturn column number
+    return ""
   }
 
 
@@ -94,7 +103,7 @@ object Root {
     else return false
 
     val move: Unit = if(board.validateMove(moveDetails._1,moveDetails._2, player_turn))
-                        board.movePiece(moveDetails._1,moveDetails._2, player_turn )
+      board.movePiece(moveDetails._1,moveDetails._2, player_turn )
 
     return true
   }
@@ -114,25 +123,57 @@ object Root {
   x = readLine()
   xo_controller(2, getter.get_input(x))*/
 
-  def Game_Engine (drawer : (String) => String , controller : (Int, String, Any) => Boolean, board : Any) : Unit = {
+  def Game_Engine (drawer : (String) => String , controller : (Int, String, Any) => String, board : Any) : Unit = {
     var player = 1
 
+    val getter = new Input
+    var x = drawer("");
+    while (true) {
+      val valid = controller(player, getter.get_input(x), board)
+      if (valid.equals("")) {
+        x = drawer(valid)
+      }else {
+        x = drawer(valid);
+        if (player == 1) player = 2
+        else player = 1
+      }
+    }
+
+/*
+    def game_logic (input_from_drawer : String): String = {
+      val getter = new Input
+      val x = drawer("null");
+      val valid = controller(player, getter.get_input(input_from_drawer), board)
+      if (player == 1) player = 2
+      else player = 1
+      valid;
+      /*
+      if (valid.equals("")) {
+        x = drawer(valid)
+      }else {
+        x = drawer(valid);
+        if (player == 1) player = 2
+        else player = 1
+      }
+      }
+       */
+    }*/
+    /*
     val getter = new Input
     var x = drawer("null");
     var runing = true
     while (runing) {
      val valid = controller(player, getter.get_input(x), board)
-     if (!valid) {
-       x = drawer("not_valid")
+     if (valid.equals("")) {
+       x = drawer(valid)
      }else {
-       x = drawer(getter.get_input(x))
+       x = drawer(valid);
        if (player == 1) player = 2
        else player = 1
      }
       if (x == "end") runing = false
-    }
+    }*/
   }
-
   def xo_drawer(state:String) : String = {
     val input = readLine()
     input
@@ -148,7 +189,8 @@ object Root {
     var board: Any = null
     var choice = starter.get_choice() match {
       case "XO" => {
-        board = new XO; Game_Engine(xo_drawer, xo_controller, board);
+        var obj = new TestGame
+        board = new XO; Game_Engine(obj.xo_drawer, xo_controller, board);
       }
       case "connect4" => {
         board = new Connect4; Game_Engine(connect4_drawer, connect4_controller, board);
@@ -161,10 +203,11 @@ object Root {
     }
   }
 
-  start()
+
 
   def main(args: Array[String]): Unit = {
     println("Hello world!")
+    start()
   }
   //def Game_Engine
 

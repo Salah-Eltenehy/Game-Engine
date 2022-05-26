@@ -28,7 +28,14 @@ class XO {
       var raw: Int=  Math.floor(e.getSceneY/100).toInt
       var col: Int = Math.floor(e.getSceneX/100).toInt
       var rectangle = Rectangle(100, 100)
-      rectangle.setStroke(Color.Green)
+      var obj = new TestGame
+      obj.state = raw + " " + col
+      var curDir :String =System.getProperty("user.dir")
+      println(obj.res + "     jjjjjjjjjjjjjj")
+      var img = new Image(curDir+"\\imgs\\"+ obj.res+".PNG")
+      rectangle.setFill(new ImagePattern(img))
+      grid_pane.add(rectangle, col, raw)
+      /*rectangle.setStroke(Color.Green)
       rectangle.setStrokeWidth(3)
       var curDir :String =System.getProperty("user.dir")
       if (player == 1)
@@ -42,7 +49,7 @@ class XO {
         rectangle.setFill(new ImagePattern(img))
         player = 1
       }
-      grid_pane.add(rectangle, col, raw)
+      grid_pane.add(rectangle, col, raw)*/
     })
     grid_pane
   }
