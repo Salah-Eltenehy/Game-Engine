@@ -11,17 +11,17 @@ class SetImages {
     var curDir :String =System.getProperty("user.dir")
     var path: String = curDir.concat("\\imgs");
     if (raw == 0)
-      {
-        path = path + "\\black\\"+col+".png"
-        var img: Image = new Image(path)
-        rectangle.setFill(new ImagePattern(img))
-      }
+    {
+      path = path + "\\black\\"+col+".png"
+      var img: Image = new Image(path)
+      rectangle.setFill(new ImagePattern(img))
+    }
     else if(raw == 1)
-      {
-        path = path + "\\black\\"+"soldier.png"
-        var img: Image = new Image(path)
-        rectangle.setFill(new ImagePattern(img))
-      }
+    {
+      path = path + "\\black\\"+"soldier.png"
+      var img: Image = new Image(path)
+      rectangle.setFill(new ImagePattern(img))
+    }
     else if(raw == 6) {
       path = path + "\\white\\"+"soldier.png"
       var img: Image = new Image(path)
@@ -37,6 +37,7 @@ class SetImages {
       else
         rectangle.fill = Color.Lavender
     }
+    rectangle.setId(col + " " + raw)
     rectangle
   }
 
