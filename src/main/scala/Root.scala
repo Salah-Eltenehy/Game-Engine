@@ -24,7 +24,6 @@ object Root {
     val j = input.substring(2,3).toInt
 
     println("i is " + i + " j is " + j)
-    //println("board(i)(j) is "+ board.xo_board(i)(j))
 
     if (j <0 || j>2 || i <0 || i>2 || input.length > 3) {println("in valid") ;return Array(Array());}
     if (board.xo_board(i)(j) != "_"){println("in valid") ;return Array(Array());}
@@ -46,24 +45,11 @@ object Root {
   }
 
   def connect4_controller(player_turn:Int, input : String, boardn : Any) : Array[Array[String]] = {
-    val board = boardn.asInstanceOf[Connect4]
+    val board = boardn.asInstanceOf[Connect4_Controller]
 
-    var col : Int = 0
-    var char = input.substring(0,1) match {
-      case "a" => col=0
-      case "b" => col=1
-      case "c" => col=2
-      case "d" => col=3
-      case "e" => col=4
-      case "f" => col=5
-      case "g" => col=6
-      case _ => col= -1
-    }
-
+    var col : Int = input.toInt
     println("col is " + col)
-    //println("board(i)(j) is "+ board.xo_board(i)(j))
 
-    if (col == -1 || input.length > 1) {println("invalid") ;return Array(Array());}
     var no_place = true
     var row_no = 0
     while (no_place && row_no < 6) {
@@ -113,19 +99,6 @@ object Root {
       val getter = new Input
       var x = drawer("");
       val valid = controller(player, getter.get_input(x), board)
-    var c = 0;
-    var h=0;
-    var k=0;
-    while (c!=9) {
-      print(valid(h)(k))
-      c+=1
-      k+=1
-      if (c%3 == 0) {
-        h+=1
-        k=0
-        println()
-      }
-    }
     if(valid.size >1) {
       if (player == 1) player = 2
       else player = 1
@@ -189,7 +162,7 @@ object Root {
         board = new XO_Controller; Game_Engine(obj.xo_drawer, xo_controller, board);
       }
       case "connect4" => {
-        board = new Connect4; Game_Engine(connect4_drawer, connect4_controller, board);
+        board = new Connect4_Controller; Game_Engine(connect4_drawer, connect4_controller, board);
       }
       case "chess" => {
         println("asda")

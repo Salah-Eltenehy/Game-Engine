@@ -49,7 +49,13 @@ class StartScreen{
           connect4_rectangle.setFill(new ImagePattern(connect4_img))
           connect4_rectangle.setOnMouseClicked((e) => {
             choice = "connect4"
-            stage.close()
+            stage.setWidth(407)
+            stage.setHeight(400)
+            var connect4 =new Connect4
+            var connect4_rectangle =  Rectangle(392, 360)
+            var connect4_img: Image = new Image(curDir+"\\imgs\\connect4_Board.PNG")
+            connect4_rectangle.setFill(new ImagePattern(connect4_img))
+            content=List(connect4_rectangle,connect4.initialize_Connect4())
           })
           connect4_rectangle.setX(30)
           connect4_rectangle.setY(250)
