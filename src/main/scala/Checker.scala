@@ -1,5 +1,5 @@
-package ChessGUI
-
+import ChessGUI.TestGame
+import Root.{Game_Engine, checkersController}
 import javafx.scene.paint.ImagePattern
 import scalafx.scene.image.Image
 import scalafx.scene.layout.GridPane
@@ -45,7 +45,27 @@ class Checker {
       {
         number_of_clickes = 0
         second_click = raw + " " + col
-        var rec1 = Rectangle(64, 64)
+        var obj = new TestGame
+        obj.state = raw + " " + col
+        var result = Game_Engine(obj.xo_drawer, checkersController, new checkers().checkersBoard);
+        if(!(result.size>0)) return gridPane
+        var i : Int=0
+        var j : Int=0
+        while(i < 8) {
+          while (j < 8) {
+            var curDir :String =System.getProperty("user.dir")
+            if(!result(i)(j).equals("_")){
+              var rectangle = Rectangle(100, 100)
+              var img = new Image(curDir+"\\imgs\\"+ result(i)(j)+".png")
+              rectangle.setFill(new ImagePattern(img))
+              gridPane.add(rectangle, j, i)
+            }
+            j += 1
+          }
+          j = 0
+          i += 1
+        }
+        /*var rec1 = Rectangle(64, 64)
         rec1.fill = Color.Gray
         var arr1 = first_click.split(" ")
         gridPane.add(rec1, Integer.parseInt(arr1(1)), Integer.parseInt(arr1(0)))
@@ -54,7 +74,7 @@ class Checker {
         var rec2 = Rectangle(64, 64)
         rec2.setFill(new ImagePattern(img))
         var arr2 = second_click.split(" ")
-        gridPane.add(rec2, Integer.parseInt(arr2(1)), Integer.parseInt(arr2(0)))
+        gridPane.add(rec2, Integer.parseInt(arr2(1)), Integer.parseInt(arr2(0)))*/
       }
       else
       {
@@ -70,7 +90,7 @@ class Checker {
       {
         if (col%2== 1)
         {
-          var img = new Image(curDir+"\\imgs\\BLAACK.png")
+          var img = new Image(curDir+"\\imgs\\b.png")
           rectangle.setFill(new ImagePattern(img))
         }
         else {
@@ -84,7 +104,7 @@ class Checker {
       {
         if (col%2== 0)
         {
-          var img = new Image(curDir+"\\imgs\\BLAACK.png")
+          var img = new Image(curDir+"\\imgs\\b.png")
           rectangle.setFill(new ImagePattern(img))
         }
         else {
@@ -98,7 +118,7 @@ class Checker {
     {
       if (col%2== 0)
       {
-        var img = new Image(curDir+"\\imgs\\WHITE.png")
+        var img = new Image(curDir+"\\imgs\\w.png")
         rectangle.setFill(new ImagePattern(img))
       }
       else {
@@ -112,7 +132,7 @@ class Checker {
       {
         if (col%2== 1)
         {
-          var img = new Image(curDir+"\\imgs\\WHITE.png")
+          var img = new Image(curDir+"\\imgs\\w.png")
           rectangle.setFill(new ImagePattern(img))
         }
         else {

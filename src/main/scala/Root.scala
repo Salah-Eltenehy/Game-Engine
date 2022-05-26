@@ -71,11 +71,10 @@ object Root {
     val board = boardn.asInstanceOf[checkers]
 
     val moveDetails:((Int, Int), (Int, Int))  = if(board.validateInput(input)) board.translateInput(input)
-    else return false
+    else return Array(Array())
 
     val move: Unit = if(board.validateMove(moveDetails._1,moveDetails._2, player_turn))
       board.movePiece(moveDetails._1,moveDetails._2, player_turn )
-
     return board.checkersBoard 
   }
   //var x = readLine()
