@@ -28,16 +28,27 @@ class XO {
     grid_pane.setOnMouseClicked((e) => {
       var raw: Int=  Math.floor(e.getSceneY/100).toInt
       var col: Int = Math.floor(e.getSceneX/100).toInt
-      var rectangle = Rectangle(100, 100)
+
       var obj = new TestGame
       obj.state = raw + " " + col
       var result = Game_Engine(obj.xo_drawer, xo_controller, board);
-      if(result.equals("") ) return grid_pane
-      var curDir :String =System.getProperty("user.dir")
-      println(obj.res + "     jjjjjjjjjjjjjj")
-      var img = new Image(curDir+"\\imgs\\"+ result+".PNG")
-      rectangle.setFill(new ImagePattern(img))
-      grid_pane.add(rectangle, col, raw)
+      if(!(result.size>0)) return grid_pane
+      var i : Int=0
+      var j : Int=0
+      while(i < 3) {
+        while (j < 3) {
+          var curDir :String =System.getProperty("user.dir")
+          if(!result(i)(j).equals("_")){
+            var rectangle = Rectangle(100, 100)
+            var img = new Image(curDir+"\\imgs\\"+ result(i)(j)+".PNG")
+            rectangle.setFill(new ImagePattern(img))
+            grid_pane.add(rectangle, j, i)
+          }
+          j += 1
+        }
+        j = 0
+        i += 1
+      }
       /*rectangle.setStroke(Color.Green)
       rectangle.setStrokeWidth(3)
       var curDir :String =System.getProperty("user.dir")

@@ -7,7 +7,7 @@ object Root {
   //var board : Any
 
 
-  def xo_controller(player_turn:Int, input : String, boardn : Any) : String = {
+  def xo_controller(player_turn:Int, input : String, boardn : Any) : Array[Array[String]] = {
     val board = boardn.asInstanceOf[XO_Controller]
 
     /*
@@ -26,8 +26,8 @@ object Root {
     println("i is " + i + " j is " + j)
     //println("board(i)(j) is "+ board.xo_board(i)(j))
 
-    if (j <0 || j>2 || i <0 || i>2 || input.length > 3) {println("in valid") ;return "";}
-    if (board.xo_board(i)(j) != "_"){println("in valid") ;return "";}
+    if (j <0 || j>2 || i <0 || i>2 || input.length > 3) {println("in valid") ;return Array(Array());}
+    if (board.xo_board(i)(j) != "_"){println("in valid") ;return Array(Array());}
     board.make_play(i,j,player_turn)
     var c = 0;
     var h=0;
@@ -42,11 +42,10 @@ object Root {
         println()
       }
     }
-    if (player_turn == 1)  "X";
-    else  "O";
+    board.xo_board
   }
 
-  def connect4_controller(player_turn:Int, input : String, boardn : Any) : String = {
+  def connect4_controller(player_turn:Int, input : String, boardn : Any) : Array[Array[String]] = {
     val board = boardn.asInstanceOf[Connect4]
 
     var col : Int = 0
@@ -64,7 +63,7 @@ object Root {
     println("col is " + col)
     //println("board(i)(j) is "+ board.xo_board(i)(j))
 
-    if (col == -1 || input.length > 1) {println("invalid") ;return "";}
+    if (col == -1 || input.length > 1) {println("invalid") ;return Array(Array());}
     var no_place = true
     var row_no = 0
     while (no_place && row_no < 6) {
@@ -75,24 +74,10 @@ object Root {
       }
     }
 
-    if (no_place) {println("invalid"); return "";}
+    if (no_place) {println("invalid"); return Array(Array())}
     board.make_play(col,player_turn)
-    var c = 0;
-    var h=0;
-    var k=0;
-    while (c!=42) {
-      print(board.connect_board(h)(k))
-      c+=1
-      k+=1
-      if (c%7 == 0) {
-        h+=1
-        k=0
-        println()
-      }
-    }
-    //println(board.xo_board)
-    //todo reuturn column number
-    return ""
+
+    board.connect_board
   }
 
 
@@ -123,13 +108,25 @@ object Root {
   x = readLine()
   xo_controller(2, getter.get_input(x))*/
   private var player = 1
-  def Game_Engine (drawer : (String) => String , controller : (Int, String, Any) => String, board : Any) : String = {
+  def Game_Engine (drawer : (String) => String , controller : (Int, String, Any) => Array[Array[String]], board : Any) : Array[Array[String]] = {
 
       val getter = new Input
       var x = drawer("");
       val valid = controller(player, getter.get_input(x), board)
-        x = drawer(valid);
-    if(!valid.equals("")) {
+    var c = 0;
+    var h=0;
+    var k=0;
+    while (c!=9) {
+      print(valid(h)(k))
+      c+=1
+      k+=1
+      if (c%3 == 0) {
+        h+=1
+        k=0
+        println()
+      }
+    }
+    if(valid.size >1) {
       if (player == 1) player = 2
       else player = 1
     }
