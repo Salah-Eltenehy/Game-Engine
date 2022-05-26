@@ -68,16 +68,31 @@ object Root {
 
 
   def checkersController(player_turn:Int, input : String, boardn : Any):Array[Array[String]] = {
-    val board = boardn.asInstanceOf[checkers]
+    val board = boardn.asInstanceOf[Checker_Controller]
 
-    val row1 = input.charAt(0).toInt
-    val column1 = input.charAt(1).toInt
-    val row2 = input.charAt(2).toInt
-    val column2 =input.charAt(3).toInt
-    
-    val move: Unit = if(board.validateMove((row1,column1),(row2, column2) player_turn))
+    val row1 = input.substring(0,1).toInt
+    val column1 = input.substring(2,3).toInt
+    val row2 =  input.substring(4,5).toInt
+    val column2 =input.substring(6,7).toInt
+
+    if(board.validateMove((row1,column1),(row2, column2) ,player_turn))
       board.movePiece((row1, column1),(row2, column2), player_turn )
-    return board.checkersBoard 
+    else
+      return Array(Array(""))
+    var c = 0;
+    var h=0;
+    var k=0;
+    while (c!=64) {
+      print(board.checkersBoard(h)(k))
+      c+=1
+      k+=1
+      if (c%8 == 0) {
+        h+=1
+        k=0
+        println()
+      }
+    }
+    board.checkersBoard
   }
   //var x = readLine()
   //var getter = new Input
