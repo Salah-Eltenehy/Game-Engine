@@ -19,7 +19,8 @@ class Chess {
   else 'W'
   //get square color from its index in the array
   def isEmpty(row:Int,col:Int) : Boolean ={
-    this.chess_board(row)(col) == '.' || this.chess_board(row)(col) == '-'}
+    this.chess_board(row)(col) == '.' || this.chess_board(row)(col) == '-'
+  }
 
   //if the letter is lowercase we know its white other wise its black//if the letter is lowercase we know its white other wise its black
   def getSide(piece: Char): Char = {
@@ -27,16 +28,18 @@ class Chess {
     'B'
   }
   //we check if the input of the promotion is right so we can call our doPromotion function
-  def isValidPromotionInput(row : Int , col : Int ,toRow :Int, toCol :Int):Unit =
+  def isValidPromotionInput(row : Int , col : Int ,toRow :Int, toCol :Int):Boolean =
   {
     val piece:Char =this.chess_board(row)(col)
     if(getLower(piece) == 'p' &&( (getSide(piece)=='W' && toRow==0)||getSide(piece)=='B' && toRow==7))
       {
+        return true;
         //ask engine which piece to promote
-        val promote : Char = 'Q' //TODO: engine function
-        doPromotion(row,col,toRow,toCol,promote)
       }
-
+      return false
+  }
+  def PromotionValidated(row : Int , col : Int ,toRow :Int, toCol :Int,promote : Char ):Unit ={
+    doPromotion(row,col,toRow,toCol,promote)
   }
   //match case for promotion pieces
   def promotionPiece(promotion : Char) :Char =promotion match {
@@ -59,7 +62,7 @@ class Chess {
   //void function take 4 arguments from coordinate and to coordinate
   //and simply move our piece as we already made sure it’s a valid move
   def move (row:Int, col:Int,toRow:Int, toCol:Int) :Unit ={
-    isValidPromotionInput(row, col, toRow, toCol)
+   // isValidPromotionInput(row, col, toRow, toCol)
 
     this.chess_board(toRow)(toCol) = this.chess_board(row)(col)
     this.chess_board(row)(col) = if (getColor(row, col) == 'W') '.'
@@ -79,9 +82,12 @@ class Chess {
       case 'B' => 1
     }
     // one forward move
-     ((toRow==row+1*sign)&&(toCol==col&& isEmpty(toRow,toCol)) ||  //or going to kill an enemy
-      (Math.abs(toCol-col)==1 && !isEmpty(toRow,toCol) &&getSide(this.chess_board(toRow)(toCol)) != getSide(this.chess_board(row)(col)))) || //or two moves first move
-      (toRow==row+2*sign && toCol==col&&notMovedPawn(row,col,turn) && isEmpty(toRow,toCol) && isEmpty(toRow-sign,toCol))
+    var one :Boolean =toRow==row+1*sign&&toCol==col&& isEmpty(toRow,toCol)
+    var two :Boolean =toRow==row+1*sign && Math.abs(toCol-col)==1 && !isEmpty(toRow,toCol) &&getSide(this.chess_board(toRow)(toCol)) != getSide(this.chess_board(row)(col))
+    var three :Boolean = toRow==row+2*sign && toCol==col&&notMovedPawn(row,col,turn) && isEmpty(toRow,toCol) && isEmpty(toRow-sign,toCol)
+     one||  //or going to kill an enemy
+       two|| //or two moves first move
+      three
   }
   //we check if it move on same column or same row
   def checkRookMove(row:Int,col:Int,toRow:Int, toCol:Int):Boolean= {
@@ -94,9 +100,10 @@ class Chess {
     while (j<4){
       while(i<=8)
         {
-         if(row+i*dx(j)==toRow && col+i*dy(j)==toCol)
+         if(row+i*dx(j)==toRow && col+i*dy(j)==toCol) {
             return true
-          if( !(row+i*dx(j) <=7 && row+i*dx(j) >=0 && col*i*dy(j)<=7&& col+i*dy(j)>=0)
+         }
+          if( !(row+i*dx(j) <=7 && row+i*dx(j) >=0 && col+i*dy(j)<=7&& col+i*dy(j)>=0)
             || (!isEmpty(row+i*dx(j),col+i*dy(j))))
             i=9 // to break
           i=i+1
@@ -207,8 +214,8 @@ class Chess {
     while (i<8){
       while (j<8){
         if(!isEmpty(i,j) && getLower(this.chess_board(i)(j))=='k' && getSide(this.chess_board(i)(j))==turn){
-          rowK=7-i
-          colK=0+j
+          rowK=i
+          colK=j
           i=9 //to break
           j=9
         }
@@ -227,8 +234,10 @@ class Chess {
         flag=flag | isValid (rowX,colX,rowK,colK,nextTurn(turn), 0)
         rowX=rowX+1
       }
+      rowX=0
       colX=colX+1
     }
+    colX=0
     flag
   }
   //we see all the possible moves for all the pieces on the grid if no move are possible then we return true
@@ -252,12 +261,16 @@ class Chess {
             flag= flag & !currentF
             l=l+1
           }
+          l=0
           k=k+1
         }
+        k=0
         j=j+1
       }
+      j=0
       i=i+1
     }
+    i=0
     flag
   }
 
