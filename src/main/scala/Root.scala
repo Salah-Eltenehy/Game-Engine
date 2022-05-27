@@ -75,11 +75,36 @@ object Root {
     }
     System.out.println(turn_c)
     board.someOneWon(turn_c)
-    if(board.isValid(in(0), in(1), in(2), in(3), turn_c, 2))
+    if(board.validPromote)
+      {
+        board.PromotionValidated(board.last_in0 , iboard.last_in0, board.last_in0, board.last_in0, input.charAt(0).toLower)
+        board.validPromote = false
+      }
+    else if(board.isValid(in(0), in(1), in(2), in(3), turn_c, 2))
     {
       if(board.isValidPromotionInput(in(0),in(1),in(2),in(3))){
         //function to get promoted piece in lower case
-        board.PromotionValidated(in(0) , in(1), in(2), in(3), 'q')
+//        board.PromotionValidated(in(0) , in(1), in(2), in(3), 'q')
+        board.validPromote = true
+        board.last_in0 = in(0)
+        board.last_in1 = in(1)
+        board.last_in2 = in(2)
+        board.last_in3 = in(3)
+        i = 0
+        var j = 0
+        while(i < 8)
+        {
+            while(j < 8)
+            {
+                ans_board(i)(j) = "*"
+              if(i == 0 && j == 1)
+                ans_board(i)(j) = turn_c + ""
+                j += 1
+            }
+            j = 0
+            i += 1
+        }
+        return ans_board
       }
       board.move(in(0), in(1), in(2), in(3))
 
@@ -163,7 +188,13 @@ object Root {
       var x = drawer("");
       val valid = controller(player, getter.get_input(x), board)
     if(valid.size >1) {
-      if (player == 1) player = 2
+      if(valid(0)(0).charAt(0) == '*') {
+        if(valid(0)(1).charAt(0) == 'W'){
+          player = 1
+        }
+        else
+          player = 2
+      }else if (player == 1) player = 2
       else player = 1
     }
 
