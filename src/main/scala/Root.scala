@@ -66,6 +66,8 @@ object Root {
     in(1) = input.substring(2, 3).toInt
     in(2) = input.substring(4, 5).toInt
     in(3) = input.substring(6, 7).toInt
+    if(!(in(0)<=7 && in(0)>=0) || !(in(1)<=7 && in(1)>=0) || !(in(2)<=7 && in(2)>=0) || !(in(3)<=7 && in(3)>=0))
+      return Array(Array(""))
     var i = 0
     var ans_board: Array[Array[String]] = Array.ofDim[String](8, 8)
     i = 0
@@ -73,6 +75,7 @@ object Root {
     if(player_turn == 2) {
       turn_c = 'B'
     }
+    System.out.println(turn_c)
     board.someOneWon(turn_c)
     if(board.isValid(in(0), in(1), in(2), in(3), turn_c, 2))
     {
