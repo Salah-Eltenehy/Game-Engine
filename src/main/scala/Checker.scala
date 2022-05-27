@@ -155,24 +155,3 @@ class Checker {
   }
 
 }
-/*
-gridPane.setOnMouseClicked((e) => {
-          var raw: Int=  Math.floor(e.getSceneY/64).toInt
-          var col: Int = Math.floor(e.getSceneX/64).toInt
-          println(s"raw: $raw col: $col number of clicks: $number_of_clickes")
-          if (number_of_clickes == 1)
-          {
-            number_of_clickes = 0
-            second_click = raw + " " + col
-
-          }
-          else
-          {
-            first_click = raw + " " + col
-            number_of_clickes = 1
-          }
-        })
-
-
-
- */

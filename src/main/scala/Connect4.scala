@@ -16,8 +16,6 @@ class Connect4 {
       while(i < 7) {
         while (j < 6) {
           var rectangle = Rectangle(56.5, 60)
-//          rectangle.setStroke(Color.Green)
-//          rectangle.setStrokeWidth(3)
           rectangle.fill = Color(0,0,0,0)
           grid_pane.add(rectangle, i, j)
 
