@@ -1,4 +1,5 @@
-import ChessGUI.SetImages
+import ChessGUI.{SetImages, TestGame}
+import Root.{Game_Engine, checkersController, chess_controller, connect4_controller}
 import javafx.scene.paint.ImagePattern
 import scalafx.scene.image.Image
 import scalafx.scene.layout.GridPane
@@ -11,11 +12,11 @@ class Board {
   var first_click: String = ""
   var second_click: String = ""
   var gridPane= new GridPane
+
   def get_choice () : GridPane = {
-    var setImages: SetImages = new SetImages()
           var i = 0
           var j = 0
-          var white: Boolean = true
+          var white: Boolean = false
           while(i < 8)
             {
               while (j < 8)
@@ -27,37 +28,21 @@ class Board {
                   else
                     rec2.fill = Color.Lavender
                   var curDir :String =System.getProperty("user.dir")
-                  if (j == 0 || j == 1 || j == 6 || j == 7)
+                  if (j == 0 || j == 1 )
                     {
-                      var img = new Image(curDir+"\\imgs\\chess\\"+board.chess_board(j)(i)+".png")
+                      var img = new Image(curDir+"\\imgs\\black\\"+board.chess_board(j)(i)+".png")
                       rec.setFill(new ImagePattern((img)))
-                    }
-                    else if (board.chess_board(j)(i).equals("-")) {
-                    rec.setFill(Color.Lavender)
+                    }else if(j == 6 || j == 7){
+                    var img = new Image(curDir+"\\imgs\\white\\"+board.chess_board(j)(i)+".png")
+                    rec.setFill(new ImagePattern((img)))
                   }
-                  else if(board.chess_board(j)(i).equals(".")) {
-                    rec.setFill(Color.Wheat)
+                  else if (board.chess_board(j)(i)=='.') {
+                    rec.fill =Color.Wheat
                   }
-           //       rec = setImages.set(j, i, rec, white)
+                  else if(board.chess_board(j)(i)=='-') {
+                    rec.fill = Color.Lavender
+                  }
                   white = !white
-  //                test(rec)
-                  gridPane.setOnMouseClicked((e) => {
-                    var raw: Int=  Math.floor(e.getSceneY/64).toInt
-                    var col: Int = Math.floor(e.getSceneX/64).toInt
-                    println(s"raw: $raw col: $col number of clicks: $number_of_clickes")
-                    if (number_of_clickes == 1)
-                      {
-                        number_of_clickes = 0
-                        second_click = raw + " " + col
-                        test()
-                      }
-                    else
-                      {
-                        first_click = raw + " " + col
-                        number_of_clickes = 1
-                      }
-                      //number_of_clickes = (number_of_clickes+1)%2
-                  })
                   rec.setOnMouseClicked((e) => {
 
                   })
@@ -72,8 +57,58 @@ class Board {
               i = i+1
             }
 
+    gridPane.setOnMouseClicked((e) => {
+      var raw: Int=  Math.floor(e.getSceneY/64).toInt
+      var col: Int = Math.floor(e.getSceneX/64).toInt
+      println(s"raw: $raw col: $col")
+      if (number_of_clickes == 1)
+      {
+        number_of_clickes = 0
+        second_click = raw + " "+ col
+        var obj = new TestGame
+        obj.state = first_click + " " + second_click
+        var result = Game_Engine(obj.xo_drawer, chess_controller,board);
+        if(!(result.size>1)) return gridPane
+        var i : Int=0
+        var j : Int=0
+        while(i < 8) {
+          while (j < 8) {
+            var curDir :String =System.getProperty("user.dir")
+            var rectangle = Rectangle(64, 64)
+            var backRectange= Rectangle(64,64)
+            if(result(i)(j).charAt(0)=='.'){
+              backRectange.fill =Color.Wheat
+              gridPane.add(backRectange,j,i)
+            }else if( result(i)(j).charAt(0)=='-'){
+              backRectange.fill = Color.Lavender
+              gridPane.add(backRectange,j,i)
+            }
+            else if (result(i)(j).charAt(0).isLower) {
+              var img = new Image(curDir + "\\imgs\\white\\" + result(i)(j) + ".png")
+              rectangle.setFill(new ImagePattern(img))
+              gridPane.add(rectangle, j, i)
+            } else if (!result(i)(j).charAt(0).isLower) {
+              var img = new Image(curDir + "\\imgs\\black\\" + result(i)(j) + ".png")
+              rectangle.setFill(new ImagePattern(img))
+              gridPane.add(rectangle, j, i)
+            }
+              //}
+            j += 1
+          }
+          j = 0
+          i += 1
+        }
+      }
+      else
+      {
+        first_click = raw + " " + col
+        number_of_clickes = 1
+      }
+    })
     gridPane
   }
+
+
 
   def test(): Unit =
   {

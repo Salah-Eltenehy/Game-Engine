@@ -10,16 +10,6 @@ object Root {
   def xo_controller(player_turn:Int, input : String, boardn : Any) : Array[Array[String]] = {
     val board = boardn.asInstanceOf[XO_Controller]
 
-    /*
-    val i = input.substring(1,2).toInt - 1
-    var j : Int = 0
-    var char = input.substring(0,1) match {
-      case "a" => j=0
-      case "b" => j=1
-      case "c" => j=2
-      case _ => j= -1
-    }*/
-
     val i = input.substring(0,1).toInt
     val j = input.substring(2,3).toInt
 
@@ -66,6 +56,55 @@ object Root {
     board.connect_board
   }
 
+  def chess_controller(player_turn:Int, input : String, boardn : Any) : Array[Array[String]] = {
+    val board = boardn.asInstanceOf[Chess]
+
+    var col : Int = 0
+    var in: Array[Int] = new Array[Int](4)
+    var i = 0
+    while(i < 4)
+    {
+      in(i) = input.split(" ")(i).toInt
+      i += 1
+    }
+    var ans_board: Array[Array[String]] = Array.ofDim[String](8, 8)
+    i = 0
+    var turn_c: Char = 'W'
+    if(player_turn == 2)
+      turn_c = 'B'
+    if(board.isValid(in(0), in(1), in(2), in(3), turn_c, 2))
+    {
+      board.move(in(0), in(1), in(2), in(3))
+    }
+    else
+    {
+      return Array(Array(""))
+    }
+    while( i != 8)
+    {
+      var j = 0
+      while(j != 8)
+      {
+        ans_board(i)(j) = board.chess_board(i)(j) + ""
+        j=j+1
+      }
+      i=i+1
+    }
+    var c = 0;
+    var h=0;
+    var k=0;
+    while (c!=64) {
+      print(ans_board(h)(k))
+      c+=1
+      k+=1
+      if (c%8 == 0) {
+        h+=1
+        k=0
+        println()
+      }
+    }
+    ans_board
+  }
 
   def checkersController(player_turn:Int, input : String, boardn : Any):Array[Array[String]] = {
     val board = boardn.asInstanceOf[Checker_Controller]
@@ -169,19 +208,24 @@ object Root {
     input
   }
 
+  def chess_drawer(state: String) : String ={
+    val input = readLine()
+    input
+  }
+
   def start () {
     val starter = new StartScreen
     var board: Any = null
     var choice = starter.get_choice() match {
       case "XO" => {
         var obj = new TestGame
-        board = new XO_Controller; Game_Engine(obj.xo_drawer, xo_controller, board);
+        board = new XO_Controller
       }
       case "connect4" => {
-        board = new Connect4_Controller; Game_Engine(connect4_drawer, connect4_controller, board);
+        board = new Connect4_Controller
       }
       case "chess" => {
-        println("asda")
+        board = new Chess
       }
       //case _ => board = new XO
       //todo list the other cases

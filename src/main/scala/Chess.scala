@@ -18,7 +18,8 @@ class Chess {
   def nextTurn(turn: Char): Char = if (turn == 'W') 'B'
   else 'W'
   //get square color from its index in the array
-  def isEmpty(row:Int,col:Int) : Boolean = this.chess_board(row)(col) == '.' || this.chess_board(row)(col) == '-'
+  def isEmpty(row:Int,col:Int) : Boolean ={
+    this.chess_board(row)(col) == '.' || this.chess_board(row)(col) == '-'}
 
   //if the letter is lowercase we know its white other wise its black//if the letter is lowercase we know its white other wise its black
   def getSide(piece: Char): Char = {
@@ -95,7 +96,8 @@ class Chess {
         {
          if(row+i*dx(j)==toRow && col+i*dy(j)==toCol)
             return true
-          if(!isEmpty(row+i*dx(j),col+i*dy(j)))
+          if( !(row+i*dx(j) <=7 && row+i*dx(j) >=0 && col*i*dy(j)<=7&& col+i*dy(j)>=0)
+            || (!isEmpty(row+i*dx(j),col+i*dy(j))))
             i=9 // to break
           i=i+1
         }
@@ -107,9 +109,8 @@ class Chess {
 
   //we check if it move on different row and different col with same difference between each other
   def checkBishopMove(row:Int,col:Int,toRow:Int, toCol:Int):Boolean= {
-    if(toRow!=row&&toCol!=col)
+    if(Math.abs(toRow-row) != Math.abs(toCol-col))
       return false
-
     val dx : Array[Int]= Array(1,1,-1,-1)
     val dy : Array[Int]= Array(1,-1,1,-1)
     var j :Int=0
@@ -119,7 +120,8 @@ class Chess {
       {
         if(row+i*dx(j)==toRow && col+i*dy(j)==toCol)
           return true
-        if(!isEmpty(row+i*dx(j),col+i*dy(j)))
+        if(!(row+i*dx(j) <=7 && row+i*dx(j) >=0 && col+i*dy(j)<=7&&col+i*dy(j)>=0) ||
+          (!isEmpty(row+i*dx(j),col+i*dy(j))))
           i=9 // to break
         i=i+1
       }
@@ -208,6 +210,7 @@ class Chess {
           rowK=7-i
           colK=0+j
           i=9 //to break
+          j=9
         }
         j=j+1
       }
