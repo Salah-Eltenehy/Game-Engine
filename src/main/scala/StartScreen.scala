@@ -11,6 +11,8 @@ class StartScreen{
   def get_choice () : String = {
     var choice : String = ""
     var app = new JFXApp {
+
+
       stage = new JFXApp.PrimaryStage {
         val root = new Group
         scene = new Scene(root, 380, 400, Color.Black) {
@@ -23,9 +25,9 @@ class StartScreen{
           chess_rectangle.setOnMouseClicked((e) => {
             choice = "chess"
             var obj = new Board
-            stage.setWidth(525)
+            stage.setWidth(600)
             stage.setHeight(550)
-            content = obj.get_choice()
+            content = List(obj.get_choice())
           })
           chess_rectangle.setX(30)
           chess_rectangle.setY(50)

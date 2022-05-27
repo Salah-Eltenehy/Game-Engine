@@ -1,6 +1,9 @@
 import ChessGUI.TestGame
 import Root.{Game_Engine, chess_controller}
+import javafx.geometry.Insets
+import javafx.scene.layout.{Background, BackgroundFill, CornerRadii}
 import javafx.scene.paint.ImagePattern
+import scalafx.scene.control.{Label, TextArea}
 import scalafx.scene.image.Image
 import scalafx.scene.layout.GridPane
 import scalafx.scene.paint.Color
@@ -13,7 +16,16 @@ class Board {
   var second_click: String = ""
   var gridPane= new GridPane
 
+  var text = new TextArea()
   def get_choice () : GridPane = {
+    var label = new Label(("Promotion"))
+
+    text.setMaxWidth(70)
+    text.setMaxHeight(30)
+    //text.setText("h")
+    gridPane.setBackground(new Background((new BackgroundFill(Color.WhiteSmoke, CornerRadii.EMPTY, Insets.EMPTY))))
+    gridPane.add(label, 8, 0)
+    gridPane.add(text, 8, 1)
           var i = 0
           var j = 0
           var white: Boolean = false
@@ -66,7 +78,7 @@ class Board {
         number_of_clickes = 0
         second_click = raw + " "+ col
         var obj = new TestGame
-        obj.state = first_click + " " + second_click
+        obj.state = first_click + " " + second_click + " " + text.getText
         var result = Game_Engine(obj.xo_drawer, chess_controller,board);
         if(!(result.size>1)) return gridPane
         var i : Int=0

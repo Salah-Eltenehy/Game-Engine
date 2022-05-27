@@ -57,16 +57,21 @@ object Root {
   }
 
   def chess_controller(player_turn:Int, input : String, boardn : Any) : Array[Array[String]] = {
+    var promotion = input.substring(8, 9).toCharArray
+    println("Promotion: " + promotion(0))
     val board = boardn.asInstanceOf[Chess]
-
     var col : Int = 0
     var in: Array[Int] = new Array[Int](4)
+    in(0) = input.substring(0, 1).toInt
+    in(1) = input.substring(2, 3).toInt
+    in(2) = input.substring(4, 5).toInt
+    in(3) = input.substring(6, 7).toInt
     var i = 0
-    while(i < 4)
+    /*while(i < 6)
     {
       in(i) = input.split(" ")(i).toInt
       i += 1
-    }
+    }*/
     var ans_board: Array[Array[String]] = Array.ofDim[String](8, 8)
     i = 0
     var turn_c: Char = 'W'
@@ -84,7 +89,7 @@ object Root {
     {
       if(board.isValidPromotionInput(in(0),in(1),in(2),in(3))){
         //function to get promoted piece in lower case
-        board.PromotionValidated(in(0) , in(1), in(2), in(3), 'q')
+        board.PromotionValidated(in(0) , in(1), in(2), in(3), promotion(0))
 //        board.validPromote = true
 //        board.last_in0 = in(0)
 //        board.last_in1 = in(1)
