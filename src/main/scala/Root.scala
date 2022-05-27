@@ -73,12 +73,12 @@ object Root {
     if(player_turn == 2) {
       turn_c = 'B'
     }
-    System.out.println(turn_c)
     board.someOneWon(turn_c)
     if(board.validPromote)
       {
-        board.PromotionValidated(board.last_in0 , iboard.last_in0, board.last_in0, board.last_in0, input.charAt(0).toLower)
+        board.PromotionValidated(board.last_in0 , board.last_in1, board.last_in2, board.last_in3, input.charAt(0).toLower)
         board.validPromote = false
+        board.move(board.last_in0 , board.last_in1, board.last_in2, board.last_in3)
       }
     else if(board.isValid(in(0), in(1), in(2), in(3), turn_c, 2))
     {
