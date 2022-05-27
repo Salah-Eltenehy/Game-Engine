@@ -84,7 +84,6 @@ class Board {
         if(!(result.size>1)) return gridPane
         var i : Int=0
         var j : Int=0
-        //gridPane = new GridPane
         while(i < 8) {
           while (j < 8) {
             var curDir :String =System.getProperty("user.dir")
@@ -115,9 +114,6 @@ class Board {
               gridPane.add(t, j, i)
               gridPane.add(rectangle, j, i)
             }
-            //gridPane.add(backRectange,j,i)
-            //gridPane.add(rectangle, j, i)
-              //}
             j += 1
           }
           j = 0
@@ -145,10 +141,8 @@ class Board {
     /*send coordinates to game_engine here
     */
     var t1 = first_click.split(" ")
-    //println(Integer.parseInt("5.5") + "                      hhhhhhhhhhhhhhhh")
     gridPane.add(rectangle1, Integer.parseInt(t1(1)), Integer.parseInt(t1(0)))
     var t2 = second_click.split(" ")
-    //println(t1(0) + "    " + t1(1) + "    " + t2(0) + "   "  + t2(1))
     gridPane.add(rectangle2, Integer.parseInt(t2(1)), Integer.parseInt(t2(0)))
     first_click = ""
     second_click = ""

@@ -78,14 +78,9 @@ class XO_GUI {
 
           content = List(gridpane,run_button, text_field,
             col_names, row1_name, row2_name, row3_name)
-
-
-          /*var arr : Array[Array[String]];
-          println(arr(0)(1))*/
         }
       }
     }
-    //app.delayedInit(x)
     if (firstentered) app.main(Array(""))
     else app.stage.show()
     gridpane

@@ -4,8 +4,6 @@ import scala.io.StdIn.readLine
 
 object Root {
   println("hello in root")
-  //var board : Any
-
 
   def xo_controller(player_turn:Int, input : String, boardn : Any) : Array[Array[String]] = {
     val board = boardn.asInstanceOf[XO_Controller]
@@ -69,11 +67,6 @@ object Root {
     in(2) = input.substring(4, 5).toInt
     in(3) = input.substring(6, 7).toInt
     var i = 0
-    /*while(i < 6)
-    {
-      in(i) = input.split(" ")(i).toInt
-      i += 1
-    }*/
     var ans_board: Array[Array[String]] = Array.ofDim[String](8, 8)
     i = 0
     var turn_c: Char = 'W'
@@ -81,12 +74,6 @@ object Root {
       turn_c = 'B'
     }
     board.someOneWon(turn_c)
-//    if(board.validPromote)
-//      {
-//        board.PromotionValidated(board.last_in0 , board.last_in1, board.last_in2, board.last_in3, input.charAt(0).toLower)
-//        board.validPromote = false
-//        board.move(board.last_in0 , board.last_in1, board.last_in2, board.last_in3)
-//      }
     if(board.isValid(in(0), in(1), in(2), in(3), turn_c, 2))
     {
       if(board.isValidPromotionInput(in(0),in(1),in(2),in(3))){
@@ -95,26 +82,6 @@ object Root {
           board.PromotionValidated(in(0) , in(1), in(2), in(3), promotion(0))
         else
           return Array(Array(""))
-//        board.validPromote = true
-//        board.last_in0 = in(0)
-//        board.last_in1 = in(1)
-//        board.last_in2 = in(2)
-//        board.last_in3 = in(3)
-//        i = 0
-//        var j = 0
-//        while(i < 8)
-//        {
-//            while(j < 8)
-//            {
-//                ans_board(i)(j) = "*"
-//              if(i == 0 && j == 1)
-//                ans_board(i)(j) = turn_c + ""
-//                j += 1
-//            }
-//            j = 0
-//            i += 1
-//        }
-//        return ans_board
       }
       board.move(in(0), in(1), in(2), in(3))
 
@@ -176,21 +143,6 @@ object Root {
     }
     board.checkersBoard
   }
-  //var x = readLine()
-  //var getter = new Input
-
-  /*
-  xo_controller(1, getter.get_input(x))
-  x = readLine()
-  xo_controller(2, getter.get_input(x))
-  x = readLine()
-  xo_controller(2, getter.get_input(x))
-  x = readLine()
-  xo_controller(1, getter.get_input(x))
-  x = readLine()
-  xo_controller(1, getter.get_input(x))
-  x = readLine()
-  xo_controller(2, getter.get_input(x))*/
   private var player = 1
   def Game_Engine (drawer : (String) => String , controller : (Int, String, Any) => Array[Array[String]], board : Any) : Array[Array[String]] = {
 
@@ -198,54 +150,12 @@ object Root {
       var x = drawer("");
       val valid = controller(player, getter.get_input(x), board)
     if(valid.size >1) {
-//      if(valid(0)(0).charAt(0) == '*') {
-//        if(valid(0)(1).charAt(0) == 'W'){
-//          player = 1
-//        }
-//        else
-//          player = 2
        if (player == 1) player = 2
       else player = 1
     }
 
     valid
   }
-
-
-/*
-    def game_logic (input_from_drawer : String): String = {
-      val getter = new Input
-      val x = drawer("null");
-      val valid = controller(player, getter.get_input(input_from_drawer), board)
-      if (player == 1) player = 2
-      else player = 1
-      valid;
-      /*
-      if (valid.equals("")) {
-        x = drawer(valid)
-      }else {
-        x = drawer(valid);
-        if (player == 1) player = 2
-        else player = 1
-      }
-      }
-       */
-    }*/
-    /*
-    val getter = new Input
-    var x = drawer("null");
-    var runing = true
-    while (runing) {
-     val valid = controller(player, getter.get_input(x), board)
-     if (valid.equals("")) {
-       x = drawer(valid)
-     }else {
-       x = drawer(valid);
-       if (player == 1) player = 2
-       else player = 1
-     }
-      if (x == "end") runing = false
-    }*/
 
   def xo_drawer(state:String) : String = {
     val input = readLine()
@@ -287,6 +197,5 @@ object Root {
     println("Hello world!")
     start()
   }
-  //def Game_Engine
 
 }
