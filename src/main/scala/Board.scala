@@ -1,5 +1,5 @@
-import ChessGUI.{SetImages, TestGame}
-import Root.{Game_Engine, checkersController, chess_controller, connect4_controller}
+import ChessGUI.TestGame
+import Root.{Game_Engine, chess_controller}
 import javafx.scene.paint.ImagePattern
 import scalafx.scene.image.Image
 import scalafx.scene.layout.GridPane
@@ -71,27 +71,39 @@ class Board {
         if(!(result.size>1)) return gridPane
         var i : Int=0
         var j : Int=0
+        //gridPane = new GridPane
         while(i < 8) {
           while (j < 8) {
             var curDir :String =System.getProperty("user.dir")
             var rectangle = Rectangle(64, 64)
             var backRectange= Rectangle(64,64)
+            var t = Rectangle(64, 64)
+            if ((i+j)%2 == 1)
+              t.fill = Color.Wheat
+            else
+              t.fill = Color.Lavender
             if(result(i)(j).charAt(0)=='.'){
               backRectange.fill =Color.Wheat
+              rectangle.fill = Color.Wheat
               gridPane.add(backRectange,j,i)
             }else if( result(i)(j).charAt(0)=='-'){
               backRectange.fill = Color.Lavender
+              rectangle.fill = Color.Lavender
               gridPane.add(backRectange,j,i)
             }
             else if (result(i)(j).charAt(0).isLower) {
               var img = new Image(curDir + "\\imgs\\white\\" + result(i)(j) + ".png")
               rectangle.setFill(new ImagePattern(img))
+              gridPane.add(t, j, i)
               gridPane.add(rectangle, j, i)
             } else if (!result(i)(j).charAt(0).isLower) {
               var img = new Image(curDir + "\\imgs\\black\\" + result(i)(j) + ".png")
               rectangle.setFill(new ImagePattern(img))
+              gridPane.add(t, j, i)
               gridPane.add(rectangle, j, i)
             }
+            //gridPane.add(backRectange,j,i)
+            //gridPane.add(rectangle, j, i)
               //}
             j += 1
           }
