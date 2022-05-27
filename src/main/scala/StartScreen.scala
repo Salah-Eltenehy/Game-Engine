@@ -25,7 +25,7 @@ class StartScreen{
           chess_rectangle.setOnMouseClicked((e) => {
             choice = "chess"
             var obj = new Board
-            stage.setWidth(600)
+            stage.setWidth(640)
             stage.setHeight(550)
             content = List(obj.get_choice())
           })
