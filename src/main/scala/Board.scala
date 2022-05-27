@@ -19,8 +19,8 @@ class Board {
   var text = new TextArea()
   def get_choice () : GridPane = {
     var label = new Label(("Promotion \n Queen enter q \n Bishop  enters b "))
-    var label2 =new Label(("Rook enter r \n Knight enter n \n Note:Case sensitive"))
-    text.setMaxWidth(70)
+    var label2 =new Label(("Rook enter r \n Knight enter n \n Note:Case sensitive  "))
+    text.setMaxWidth(95)
     text.setMaxHeight(30)
     //text.setText("h")
     gridPane.setBackground(new Background((new BackgroundFill(Color.WhiteSmoke, CornerRadii.EMPTY, Insets.EMPTY))))
