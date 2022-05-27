@@ -74,37 +74,37 @@ object Root {
       turn_c = 'B'
     }
     board.someOneWon(turn_c)
-    if(board.validPromote)
-      {
-        board.PromotionValidated(board.last_in0 , board.last_in1, board.last_in2, board.last_in3, input.charAt(0).toLower)
-        board.validPromote = false
-        board.move(board.last_in0 , board.last_in1, board.last_in2, board.last_in3)
-      }
-    else if(board.isValid(in(0), in(1), in(2), in(3), turn_c, 2))
+//    if(board.validPromote)
+//      {
+//        board.PromotionValidated(board.last_in0 , board.last_in1, board.last_in2, board.last_in3, input.charAt(0).toLower)
+//        board.validPromote = false
+//        board.move(board.last_in0 , board.last_in1, board.last_in2, board.last_in3)
+//      }
+    if(board.isValid(in(0), in(1), in(2), in(3), turn_c, 2))
     {
       if(board.isValidPromotionInput(in(0),in(1),in(2),in(3))){
         //function to get promoted piece in lower case
-//        board.PromotionValidated(in(0) , in(1), in(2), in(3), 'q')
-        board.validPromote = true
-        board.last_in0 = in(0)
-        board.last_in1 = in(1)
-        board.last_in2 = in(2)
-        board.last_in3 = in(3)
-        i = 0
-        var j = 0
-        while(i < 8)
-        {
-            while(j < 8)
-            {
-                ans_board(i)(j) = "*"
-              if(i == 0 && j == 1)
-                ans_board(i)(j) = turn_c + ""
-                j += 1
-            }
-            j = 0
-            i += 1
-        }
-        return ans_board
+        board.PromotionValidated(in(0) , in(1), in(2), in(3), 'q')
+//        board.validPromote = true
+//        board.last_in0 = in(0)
+//        board.last_in1 = in(1)
+//        board.last_in2 = in(2)
+//        board.last_in3 = in(3)
+//        i = 0
+//        var j = 0
+//        while(i < 8)
+//        {
+//            while(j < 8)
+//            {
+//                ans_board(i)(j) = "*"
+//              if(i == 0 && j == 1)
+//                ans_board(i)(j) = turn_c + ""
+//                j += 1
+//            }
+//            j = 0
+//            i += 1
+//        }
+//        return ans_board
       }
       board.move(in(0), in(1), in(2), in(3))
 

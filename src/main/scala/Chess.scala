@@ -9,11 +9,11 @@ class Chess {
                                               Array('p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'),
                                               Array('r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'))
 
-  var validPromote = false
-  var last_in0 : Int
-  var last_in1 : Int
-  var last_in2 : Int
-  var last_in3 : Int
+//  var validPromote = false
+//  var last_in0 : Int
+//  var last_in1 : Int
+//  var last_in2 : Int
+//  var last_in3 : Int
   //get square color from its index in the array
   def getColor(row: Int, col: Int): Char = if ((row + col) % 2 == 1) 'W'
                   else 'B'
