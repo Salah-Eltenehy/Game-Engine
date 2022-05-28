@@ -177,21 +177,7 @@ object Root {
 
   def start () {
     val starter = new StartScreen
-    var board: Any = null
-    var choice = starter.get_choice() match {
-      case "XO" => {
-        var obj = new Drawer
-        board = new XO_Controller
-      }
-      case "connect4" => {
-        board = new Connect4_Controller
-      }
-      case "chess" => {
-        board = new Chess_Controller
-      }
-      //case _ => board = new XO
-      //todo list the other cases
-    }
+    starter.get_choice()
   }
 
 

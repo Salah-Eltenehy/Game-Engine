@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BoardDrawingEngine.iml" filepath="$PROJECT_DIR$/.idea/modules/BoardDrawingEngine.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BoardDrawingEngine-build.iml" filepath="$PROJECT_DIR$/.idea/modules/BoardDrawingEngine-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/testScala2.iml" filepath="$PROJECT_DIR$/.idea/modules/testScala2.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/testScala2-build.iml" filepath="$PROJECT_DIR$/.idea/modules/testScala2-build.iml" />
     </modules>
   </component>
