@@ -19,7 +19,6 @@ class Checker_Controller {
     checkersBoard.foreach{x => x.foreach(print); println()}
 
   def validateMove(start: (Int, Int), end : (Int, Int), turn: Int) : Boolean = {
-    println(s"now turn is: ${turn}")
 
     var piece: String = checkersBoard(start._1)(start._2) //get the piece the player choose
 
@@ -33,57 +32,47 @@ class Checker_Controller {
 
     //get horizontal distance for the chosen move
     val x_space : Int = end._2 - start._2
-    println(s"x space is: ${x_space}")
 
     //get vertical distance for the chosen move
     val y_space : Int = end._1 - start._1
-    println(s"y space is: ${y_space}")
 
     //boolean determine which player
     var player1 : Boolean = if(turn == 1) true
                             else false
 
-    println(s"is it player 1: ${player1.toString}")
-    println(s"is it player 2: ${(!player1).toString}")
-
     //check if the  piece is a king piece
     var special : Boolean = if(checkersBoard(start._1)(start._2).equals("sw") || checkersBoard(start._1)(start._2).equals("sb")) true
                             else false
-    println(s"this piece is special: $special")
 
     //general black piece move (go to the next row and check that dist. square is empty)
     var blackMove : Boolean = player1 && y_space == 1 && !availableBlackAttack
 
     //general white piece move(go to the next row and check that dist. square is empty)
     var whiteMove : Boolean = !player1 && y_space == -1 && !availableWhiteAttack
-    println(s"this move is small black move ${blackMove.toString} and is small white move ${whiteMove.toString}")
 
     //black piece attack movement constant condition
     var blackAttack : Boolean = player1 && y_space == 2 && (x_space == 2 || x_space == -2)
 
     //white piece attack movement constant condition
     var whiteAttack : Boolean = !player1 && y_space == -2 && (x_space == 2 || x_space == -2)
-    println(s"this is black attack move: ${blackAttack.toString}, and white attack move: ${whiteAttack.toString}")
 
     //special attack constant condition
-    var specialBlackAttack: Boolean = player1 && y_space == -2 && (x_space == 2 || x_space == -2)
-    var specialWhiteAttack: Boolean = !player1 && y_space == 2 && (x_space == 2 || x_space == -2)
-
-    println(s"this is going to be special move for black piece: ${specialBlackAttack.toString}, and it's special white piece: ${specialWhiteAttack}")
+    var specialBlackAttack: Boolean = special && player1 && y_space == -2 && (x_space == 2 || x_space == -2)
+    var specialWhiteAttack: Boolean = special && !player1 && y_space == 2 && (x_space == 2 || x_space == -2)
 
     var valid : Boolean = {
 
       /*one step moves*/
-      if (blackMove && (x_space == -1 || x_space == 1)) true //black to left
-      else if(whiteMove && (x_space == -1 || x_space == 1  )) true //white to left
+      if (blackMove && (x_space == -1 || x_space == 1)) true  //black to left
+      else if(whiteMove && (x_space == -1 || x_space == 1  ))true //white to left
 
       /*two level steps*/
-      else if(blackAttack && checkersBoard((start._1 + end._1) / 2)((start._2 + end._2) / 2).equals("w") || checkersBoard((start._1 + end._1) / 2)((start._2 + end._2) / 2).equals("sw")) true
-      else if(whiteAttack && checkersBoard((start._1 + end._1) / 2)((start._2 + end._2) / 2).equals("b") || checkersBoard((start._1 + end._1) / 2)((start._2 + end._2) / 2).equals("sb")) true
+      else if(blackAttack && (checkersBoard((start._1 + end._1) / 2)((start._2 + end._2) / 2).equals("w") || checkersBoard((start._1 + end._1) / 2)((start._2 + end._2) / 2).equals("sw"))) true
+      else if(whiteAttack && (checkersBoard((start._1 + end._1) / 2)((start._2 + end._2) / 2).equals("b") || checkersBoard((start._1 + end._1) / 2)((start._2 + end._2) / 2).equals("sb"))) true
 
       /*special moves*/
-      else if(specialBlackAttack && checkersBoard((start._1 + end._1) / 2)((start._2 + end._2) / 2).equals("w") || checkersBoard((start._1 + end._1) / 2)((start._2 + end._2) / 2).equals("sw") ) true
-      else if(specialWhiteAttack && checkersBoard((start._1 + end._1) / 2)((start._2 + end._2) / 2).equals("b") || checkersBoard((start._1 + end._1) / 2)((start._2 + end._2) / 2).equals("sb") ) true
+      else if(specialBlackAttack && (checkersBoard((start._1 + end._1) / 2)((start._2 + end._2) / 2).equals("w") || checkersBoard((start._1 + end._1) / 2)((start._2 + end._2) / 2).equals("sw"))) true
+      else if(specialWhiteAttack && (checkersBoard((start._1 + end._1) / 2)((start._2 + end._2) / 2).equals("b") || checkersBoard((start._1 + end._1) / 2)((start._2 + end._2) / 2).equals("sb"))) true
 
       //invalid move
       else false
@@ -112,8 +101,6 @@ class Checker_Controller {
     /*check if there any king pieces after each move*/
     if(player == 1 && end._1 == 7) {checkersBoard(end._1)(end._2) = "sb"}
     else if(player == 2 && end._1 == 0) {checkersBoard(end._1)(end._2)= "sw"}
-
-    checkersBoard.foreach{x => x.foreach(print); println()}
 
     availableWhiteAttack = if(player ==1 && checkersBoard(end._1)(end._2).equals("b") && end._1 < 7 && end._1 > 0 && end._2 < 7 && end._2 > 0){
       if((checkersBoard(end._1 + 1)(end._2 + 1).equals("w") && checkersBoard(end._1 - 1)(end._2 - 1).equals("_")) ||
