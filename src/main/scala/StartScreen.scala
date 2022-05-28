@@ -1,3 +1,5 @@
+import javafx.scene.control.Alert
+import javafx.scene.control.Alert.AlertType
 import javafx.scene.paint.ImagePattern
 import scalafx.application.JFXApp
 import scalafx.scene._
@@ -23,9 +25,14 @@ class StartScreen{
           var chess_img: Image = new Image(curDir+"\\imgs\\chess.PNG")
           chess_rectangle.setFill(new ImagePattern(chess_img))
           chess_rectangle.setOnMouseClicked((e) => {
+            var alert = new Alert(AlertType.NONE)
+            alert.setTitle("Promotion")
+            alert.setAlertType(AlertType.INFORMATION)
+            alert.setContentText("For Promotion\nQueen: q  Bishop: b\nRook: r  Knight: n\nNote:Case sensitive ")
+            alert.show()
             choice = "chess"
             var obj = new Board
-            stage.setWidth(640)
+            stage.setWidth(610)
             stage.setHeight(550)
             content = List(obj.get_choice())
           })
@@ -80,6 +87,7 @@ class StartScreen{
           back_ground_rectangle.setFill(new ImagePattern(back_ground_img))
           content = List (back_ground_rectangle, chess_rectangle, connect4_rectangle, XO_rectangle, checker_rectangle )
         }
+        resizable = false
       }
     }
     app.main(Array(""))
