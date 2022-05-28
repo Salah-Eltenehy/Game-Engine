@@ -3,7 +3,7 @@ import javafx.scene.control.Alert.AlertType
 import javafx.scene.paint.ImagePattern
 import scalafx.application.JFXApp
 import scalafx.scene._
-import scalafx.scene.control.Button
+import scalafx.scene.control.{Button, Label}
 import scalafx.scene.image.Image
 import scalafx.scene.layout.GridPane
 import scalafx.scene.paint._
@@ -11,6 +11,8 @@ import scalafx.scene.shape.Rectangle
 
 
 class StartScreen{
+  //var label = new Label()
+
   def get_choice () : String = {
     var choice : String = ""
     var app = new JFXApp {
@@ -33,11 +35,13 @@ class StartScreen{
             alert.show()
             choice = "chess"
             var obj = new ChessBoard
+            stage.title = choice
             stage.setWidth(610)
             stage.setHeight(550)
             startButton.setLayoutX(515)
             startButton.setLayoutY(130)
-
+            //        label.setLayoutX(515)
+            //      label.setLayoutY(150)
             content = List(obj.get_choice(), startButton)
           })
           chess_rectangle.setX(30)
@@ -48,6 +52,7 @@ class StartScreen{
           checker_rectangle.setFill(new ImagePattern(checker_img))
           checker_rectangle.setOnMouseClicked((e) => {
             choice = "checker"
+            stage.title = choice
             var obj = new CheckerBoard
             stage.setWidth(610)
             stage.setHeight(550)
@@ -64,6 +69,7 @@ class StartScreen{
           connect4_rectangle.setFill(new ImagePattern(connect4_img))
           connect4_rectangle.setOnMouseClicked((e) => {
             choice = "connect4"
+            stage.title = choice
             stage.setWidth(490)
             stage.setHeight(400)
             var connect4 =new Connect4Board
@@ -94,6 +100,7 @@ class StartScreen{
           XO_rectangle.setX(250)
           XO_rectangle.setY(250)
           startButton.setOnAction(e => {
+            Root.player = 1
             stage.setWidth(380)
             stage.setHeight(400)
             content = List (back_ground_rectangle, chess_rectangle, connect4_rectangle, XO_rectangle, checker_rectangle )

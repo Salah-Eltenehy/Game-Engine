@@ -146,7 +146,7 @@ object Root {
     }
     board.checkersBoard
   }
-  private var player = 1
+  var player = 1
   def Game_Engine (drawer : (String) => String , controller : (Int, String, Any) => Array[Array[String]], board : Any) : Array[Array[String]] = {
 
       val getter = new Input

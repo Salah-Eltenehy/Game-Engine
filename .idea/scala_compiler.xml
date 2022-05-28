@@ -11,5 +11,15 @@
         <parameter value="utf8" />
       </parameters>
     </profile>
+    <profile name="sbt 3" modules="BoardDrawingEngine">
+      <option name="deprecationWarnings" value="true" />
+      <option name="uncheckedWarnings" value="true" />
+      <parameters>
+        <parameter value="-Xcheckinit" />
+        <parameter value="-encoding" />
+        <parameter value="utf8" />
+        <parameter value="-Ymacro-annotations" />
+      </parameters>
+    </profile>
   </component>
 </project>
