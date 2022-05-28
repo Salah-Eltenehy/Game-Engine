@@ -1,5 +1,5 @@
 
-class Chess {
+class Chess_Controller {
   var chess_board :Array[Array[Char]]= Array(Array('R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'),
                                               Array('P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'),
                                               Array('-', '.', '-', '.', '-', '.', '-', '.'),

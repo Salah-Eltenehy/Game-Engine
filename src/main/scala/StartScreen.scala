@@ -32,7 +32,7 @@ class StartScreen{
             alert.setContentText("For Promotion\nQueen: q  Bishop: b\nRook: r  Knight: n\nNote:Case sensitive ")
             alert.show()
             choice = "chess"
-            var obj = new Board
+            var obj = new ChessBoard
             stage.setWidth(610)
             stage.setHeight(550)
             startButton.setLayoutX(515)
@@ -48,7 +48,7 @@ class StartScreen{
           checker_rectangle.setFill(new ImagePattern(checker_img))
           checker_rectangle.setOnMouseClicked((e) => {
             choice = "checker"
-            var obj = new Checker
+            var obj = new CheckerBoard
             stage.setWidth(610)
             stage.setHeight(550)
             startButton.setLayoutX(515)
@@ -66,7 +66,7 @@ class StartScreen{
             choice = "connect4"
             stage.setWidth(490)
             stage.setHeight(400)
-            var connect4 =new Connect4
+            var connect4 =new Connect4Board
             var connect4_rectangle =  Rectangle(392, 360)
             var connect4_img: Image = new Image(curDir+"\\imgs\\connect4_Board.PNG")
             connect4_rectangle.setFill(new ImagePattern(connect4_img))
@@ -83,7 +83,7 @@ class StartScreen{
           XO_rectangle.setFill(new ImagePattern(XO_img))
           XO_rectangle.setOnMouseClicked((e) => {
             choice = "XO"
-            var obj = new XO
+            var obj = new XOBoard
             stage.title = "Tic Tac Toe"
             stage.setWidth(400)
             stage.setHeight(349)

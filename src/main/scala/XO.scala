@@ -1,4 +1,4 @@
-import ChessGUI.TestGame
+import ChessGUI.Drawer
 import Root.{Game_Engine, xo_controller}
 import javafx.scene.paint.ImagePattern
 import scalafx.scene.image.Image
@@ -6,7 +6,7 @@ import scalafx.scene.layout.GridPane
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Rectangle
 
-class XO {
+class XOBoard {
   def initialize_XO(): GridPane =
   {
     var board = new XO_Controller
@@ -28,9 +28,9 @@ class XO {
       var raw: Int=  Math.floor(e.getSceneY/100).toInt
       var col: Int = Math.floor(e.getSceneX/100).toInt
 
-      var obj = new TestGame
+      var obj = new Drawer
       obj.state = raw + " " + col
-      var result = Game_Engine(obj.xo_drawer, xo_controller, board);
+      var result = Game_Engine(obj.drawer, xo_controller, board);
       if(!(result.size>1)) return grid_pane
       var i : Int=0
       var j : Int=0

@@ -1,4 +1,4 @@
-import ChessGUI.TestGame
+import ChessGUI.Drawer
 import Root.{Game_Engine, checkersController}
 import javafx.scene.paint.ImagePattern
 import scalafx.scene.image.Image
@@ -6,7 +6,7 @@ import scalafx.scene.layout.GridPane
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Rectangle
 
-class Checker {
+class CheckerBoard {
   var number_of_clickes: Int = 0
   var first_click: String = ""
   var second_click: String = ""
@@ -47,9 +47,9 @@ class Checker {
       {
         number_of_clickes = 0
         second_click = raw + " "+ col
-        var obj = new TestGame
+        var obj = new Drawer
         obj.state = first_click + " " + second_click
-        var result = Game_Engine(obj.xo_drawer, checkersController,board);
+        var result = Game_Engine(obj.drawer, checkersController,board);
         if(!(result.size>1)) return gridPane
         var i : Int=0
         var j : Int=0

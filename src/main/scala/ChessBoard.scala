@@ -1,4 +1,4 @@
-import ChessGUI.TestGame
+import ChessGUI.Drawer
 import Root.{Game_Engine, chess_controller}
 import javafx.geometry.Insets
 import javafx.scene.layout.{Background, BackgroundFill, CornerRadii}
@@ -9,8 +9,8 @@ import scalafx.scene.layout.GridPane
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Rectangle
 
-class Board {
-  var board = new Chess
+class ChessBoard {
+  var board = new Chess_Controller
   var number_of_clickes: Int = 0
   var first_click: String = ""
   var second_click: String = ""
@@ -76,9 +76,9 @@ class Board {
       {
         number_of_clickes = 0
         second_click = raw + " "+ col
-        var obj = new TestGame
+        var obj = new Drawer
         obj.state = first_click + " " + second_click + " " + text.getText
-        var result = Game_Engine(obj.xo_drawer, chess_controller,board);
+        var result = Game_Engine(obj.drawer, chess_controller,board);
         if(!(result.size>1)) return gridPane
         var i : Int=0
         var j : Int=0

@@ -1,4 +1,4 @@
-import ChessGUI.TestGame
+import ChessGUI.Drawer
 
 import scala.io.StdIn.readLine
 
@@ -59,7 +59,7 @@ object Root {
     if(input.length>8)
        promotion = input.substring(8, 9).toCharArray
     println("Promotion: " + promotion(0))
-    val board = boardn.asInstanceOf[Chess]
+    val board = boardn.asInstanceOf[Chess_Controller]
     var col : Int = 0
     var in: Array[Int] = new Array[Int](4)
     in(0) = input.substring(0, 1).toInt
@@ -180,14 +180,14 @@ object Root {
     var board: Any = null
     var choice = starter.get_choice() match {
       case "XO" => {
-        var obj = new TestGame
+        var obj = new Drawer
         board = new XO_Controller
       }
       case "connect4" => {
         board = new Connect4_Controller
       }
       case "chess" => {
-        board = new Chess
+        board = new Chess_Controller
       }
       //case _ => board = new XO
       //todo list the other cases

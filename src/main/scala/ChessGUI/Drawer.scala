@@ -1,9 +1,9 @@
 package ChessGUI
 
-class TestGame {
+class Drawer {
   var state: String = ""
   var res: String = ""
-  def xo_drawer(result: String = "") :String = {
+  def drawer(result: String = "") :String = {
     res = result
     state
   }

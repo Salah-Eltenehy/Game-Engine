@@ -1,11 +1,11 @@
-import ChessGUI.TestGame
+import ChessGUI.Drawer
 import Root.{Game_Engine, connect4_controller, xo_controller}
 import javafx.scene.paint.ImagePattern
 import scalafx.scene.image.Image
 import scalafx.scene.layout.GridPane
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Rectangle
-class Connect4 {
+class Connect4Board {
 
     def initialize_Connect4(): GridPane =
     {
@@ -26,9 +26,9 @@ class Connect4 {
       }
       grid_pane.setOnMouseClicked((e) => {
         var col: Int = Math.floor(e.getSceneX/57).toInt
-        var obj = new TestGame
+        var obj = new Drawer
         obj.state = col+""
-        var result = Game_Engine(obj.xo_drawer, connect4_controller, board);
+        var result = Game_Engine(obj.drawer, connect4_controller, board);
         if(!(result.size>1)) return grid_pane
         var i : Int=0
         var j : Int=0
